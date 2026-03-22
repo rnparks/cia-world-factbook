@@ -5,7 +5,7 @@ description = "Pythonic access to CIA World Factbook data"
 readme = "README.md"
 license = "MIT"
 authors = [
-    { name = "rnparks", email = "rnparks@gmail.com" }
+    { name = "Ryan Parks", email = "rnparks@gmail.com" }
 ]
 requires-python = ">=3.10"
 dependencies = []
