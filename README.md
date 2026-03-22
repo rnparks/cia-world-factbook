@@ -1,5 +1,8 @@
 # cia-world-factbook
 
+[![CI](https://github.com/rnparks/cia-world-factbook/actions/workflows/ci.yml/badge.svg)](https://github.com/rnparks/cia-world-factbook/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/cia-world-factbook)](https://pypi.org/project/cia-world-factbook/)
+
 Pythonic access to CIA World Factbook data for 256 countries and territories across 12 regions. Zero dependencies. Supports both attribute access (dot notation) and dictionary access with case-insensitive key lookup, tab completion, and built-in search.
 
 ## Installation
