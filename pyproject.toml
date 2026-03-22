@@ -23,6 +23,11 @@ classifiers = [
     "Typing :: Typed",
 ]
 
+[project.urls]
+Homepage = "https://github.com/rnparks/cia-world-factbook"
+Repository = "https://github.com/rnparks/cia-world-factbook"
+Issues = "https://github.com/rnparks/cia-world-factbook/issues"
+
 [dependency-groups]
 dev = [
     "pytest>=7.0",
