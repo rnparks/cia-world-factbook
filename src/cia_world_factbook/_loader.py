@@ -574,3 +574,29 @@ def load_country(name: str) -> FactbookDict:
     wrapped = FactbookDict(raw)
     _country_cache[name] = wrapped
     return wrapped
+
+
+def compare(path: str) -> dict[str, str | FactbookDict | None]:
+    """Get a single metric across all 256 countries.
+
+    Args:
+        path: Dot-separated attribute path using normalized keys.
+              Example: ``"economy.gdp_official_exchange_rate"``
+
+    Returns:
+        Dict mapping 2-letter country codes to the value at that path,
+        or ``None`` if the country lacks the given field.
+    """
+    segments = path.split(".")
+    codes = sorted({code for code, (_, stem) in COUNTRY_REGISTRY.items() if code == stem})
+    results: dict[str, str | FactbookDict | None] = {}
+    for code in codes:
+        node = load_country(code)
+        try:
+            for seg in segments:
+                node = getattr(node, seg)
+        except AttributeError:
+            results[code] = None
+            continue
+        results[code] = node.text if hasattr(node, "text") else node
+    return results

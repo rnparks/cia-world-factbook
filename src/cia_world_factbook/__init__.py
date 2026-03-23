@@ -37,7 +37,7 @@ def __dir__():
     """Support tab completion at the module level."""
     from ._loader import COUNTRY_REGISTRY
 
-    return sorted(set(list(COUNTRY_REGISTRY.keys()) + ["__version__", "load_country"]))
+    return sorted(set(list(COUNTRY_REGISTRY.keys()) + ["__version__", "load_country", "compare"]))
 
 
 def load_country(name: str):
@@ -96,6 +96,22 @@ def search(query: str) -> list[tuple[str, str, str]]:
             best_name = max(names, key=len) if names else code
             results.append((code, best_name, region))
     return results
+
+
+def compare(path: str) -> dict:
+    """Get a single metric across all 256 countries.
+
+    Args:
+        path: Dot-separated attribute path using normalized keys.
+              Example: ``"economy.gdp_official_exchange_rate"``
+
+    Returns:
+        Dict mapping 2-letter country codes to the value at that path,
+        or ``None`` if the country lacks the given field.
+    """
+    from ._loader import compare as _compare
+
+    return _compare(path)
 
 
 def info() -> str:

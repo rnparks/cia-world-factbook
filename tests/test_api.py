@@ -164,6 +164,37 @@ class TestInfoFunction:
         assert "africa" in table
 
 
+class TestCompareFunction:
+    def test_compare_returns_dict_with_all_countries(self) -> None:
+        from cia_world_factbook import compare
+        result = compare("government.capital.name")
+        assert isinstance(result, dict)
+        assert len(result) == 256
+
+    def test_compare_known_value(self) -> None:
+        from cia_world_factbook import compare
+        result = compare("government.capital.name")
+        assert "Washington" in result["us"]
+
+    def test_compare_missing_path_returns_none(self) -> None:
+        from cia_world_factbook import compare
+        result = compare("economy.gdp_official_exchange_rate")
+        # Antarctica has no GDP
+        assert result["ay"] is None
+
+    def test_compare_invalid_path_all_none(self) -> None:
+        from cia_world_factbook import compare
+        result = compare("fake.nonexistent.path")
+        assert all(v is None for v in result.values())
+
+    def test_compare_branch_path(self) -> None:
+        from cia_world_factbook import compare
+        result = compare("geography")
+        # Should return FactbookDict, not a string
+        assert result["us"] is not None
+        assert not isinstance(result["us"], str)
+
+
 class TestModuleDir:
     def test_dir_includes_countries(self) -> None:
         import cia_world_factbook
@@ -176,4 +207,5 @@ class TestModuleDir:
         import cia_world_factbook
         d = dir(cia_world_factbook)
         assert "load_country" in d
+        assert "compare" in d
         assert "__version__" in d
