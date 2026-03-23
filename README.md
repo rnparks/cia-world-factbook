@@ -226,6 +226,29 @@ list_regions()
 
 ---
 
+## Comparing Countries
+
+### `compare(path)` -- get one metric across all 256 countries
+
+Pass a dot-separated path using normalized keys. Returns a dict mapping country codes to values, or `None` for countries that lack the field.
+
+```python
+from cia_world_factbook import compare
+
+compare("economy.gdp_official_exchange_rate")
+# {'us': '$29.185 trillion (2024 est.)', 'fr': '$3.162 trillion (2024 est.)', 'ay': None, ...}
+
+compare("government.capital.name")
+# {'us': 'Washington, DC', 'fr': 'Paris', 'ja': 'Tokyo', ...}
+
+compare("people_and_society.population.total")
+# {'us': '338,016,259 (2025 est.)', 'ch': '1,416,043,270 (2025 est.)', ...}
+```
+
+Works with any path you can use in dot notation on a single country. Countries missing the field return `None` (e.g., Antarctica has no GDP).
+
+---
+
 ## Exploring Country Data
 
 ### Data sections
@@ -443,6 +466,7 @@ cia_world_factbook.__version__
 | `info()` | Print a reference table of all countries. Also returns the table as a string. |
 | `list_countries()` | Return sorted list of all 256 two-letter country codes. |
 | `list_regions()` | Return sorted list of all 12 region names. |
+| `compare(path)` | Get a single metric across all 256 countries. Returns `dict[str, str \| None]`. |
 
 ### Module-level attributes
 
