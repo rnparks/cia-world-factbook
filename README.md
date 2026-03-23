@@ -427,7 +427,7 @@ Python is more than fast enough -- no native extensions needed.
 ```python
 import cia_world_factbook
 cia_world_factbook.__version__
-# '0.1.0'
+# '0.1.1'
 ```
 
 ---
@@ -448,7 +448,7 @@ cia_world_factbook.__version__
 
 | Attribute | Description |
 |---|---|
-| `__version__` | Package version string (e.g., `'0.1.0'`). |
+| `__version__` | Package version string (e.g., `'0.1.1'`). |
 | `us`, `ca`, `gm`, ... | Lazy-loaded country data. Any registry key works as an import or attribute. |
 
 ### `FactbookDict` -- the data wrapper
